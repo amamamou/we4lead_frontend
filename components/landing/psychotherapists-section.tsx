@@ -76,7 +76,7 @@ export default function TherapistsSection({ locale }: { locale?: Locale }) {
     setIsModalOpen(true);
   };
 
-  
+  const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL!
 
   // Use only the fetched medecins as the data source (no hardcoded fallback)
   const dataSource: Therapist[] = medecins.map((m) => ({
@@ -113,7 +113,7 @@ export default function TherapistsSection({ locale }: { locale?: Locale }) {
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch('http://localhost:8080/public/users/medecins', {
+        const res = await fetch(`${BACKEND_URL}/public/users/medecins`, {
           signal: controller.signal,
         });
         if (!res.ok) throw new Error(`Failed to fetch medecins: ${res.status}`);

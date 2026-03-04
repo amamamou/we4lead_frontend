@@ -1,4 +1,4 @@
-const BACKEND = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8080'
+const BACKEND = process.env.NEXT_PUBLIC_BACKEND_URL!
 
 export function normalizeLogo(logo?: string | null) {
   // Fallback placeholder in the public folder

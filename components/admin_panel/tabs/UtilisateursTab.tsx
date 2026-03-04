@@ -64,10 +64,12 @@ export default function UtilisateursTab() {
     { key: 'email', label: 'Email' },
     { key: 'telephone', label: 'Téléphone' },
     { key: 'role', label: "Rôle", render: (row: User) => {
-      const role = String(row.role || '').toUpperCase()
-      if (role === 'SUPER_ADMIN' || role === 'ADMIN') return 'Administratif'
-      if (role === 'PROFESSEUR' || role === 'ETUDIANT') return 'Utilisateur'
-      return role.charAt(0).toUpperCase() + role.slice(1).toLowerCase()
+      // Normalize role similarly to DemandesTab: prefer backend role values,
+      // map admin variants to a single ADMINISTRATIF label, otherwise show the
+      // backend-provided role in uppercase; show '—' when missing.
+  const r = String(((row as User & { userRole?: string }).userRole) || row.role || '').toUpperCase()
+      if (r === 'SUPER_ADMIN' || r === 'ADMIN' || r === 'SUPER-ADMIN' || r === 'SUPER_ADMIN') return 'ADMINISTRATIF'
+      return r || '—'
     } },
     { key: 'nombreDemandes', label: 'Demandes', sortable: true },
   { key: 'universiteDisplay', label: 'Institution' },

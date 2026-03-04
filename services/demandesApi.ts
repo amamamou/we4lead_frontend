@@ -1,6 +1,6 @@
 import type { CreateDemandePayload, Demande } from '../types/demande'
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8080'
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL!
 const BASE = `${BACKEND_URL}/demandes`
 
 async function handleJsonResponse<T>(res: Response): Promise<T> {
